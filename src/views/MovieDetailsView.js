@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { fetchMovieDetails } from '../sevices/tmdb-api';
 import Credits from '../components/Credits/Credits';
 import Reviews from '../components/Reviews/Reviews';
@@ -58,10 +58,24 @@ class MovieDetailsPage extends Component {
         <p>Additional information</p>
         <ul>
           <li className="movie-item">
-            <NavLink to={`${url}/cast`}>Cast</NavLink>
+            <Link
+              to={{
+                pathname: `${url}/cast`,
+                state: { from: this.props.location?.state?.from },
+              }}
+            >
+              Cast
+            </Link>
           </li>
           <li className="movie-item">
-            <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+            <Link
+              to={{
+                pathname: `${url}/reviews`,
+                state: { from: this.props.location?.state?.from },
+              }}
+            >
+              Reviews
+            </Link>
           </li>
         </ul>
 

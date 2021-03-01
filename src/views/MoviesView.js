@@ -3,11 +3,20 @@ import { searchMovies } from '../sevices/tmdb-api';
 import MoviesList from '../components/MoviesList/MoviesList';
 import './MoviesView.scss';
 
-class HomeView extends Component {
+class MoviesView extends Component {
   state = {
     movies: [],
     query: '',
   };
+
+  async componentDidMount() {
+    if (this.props.location.search) {
+      await this.setState({ query: this.props.location.search.substr(3) });
+      searchMovies(this.state.query).then(fetchedMovies => {
+        this.setState({ movies: fetchedMovies });
+      });
+    }
+  }
 
   handleChange = e => {
     this.setState({ query: e.currentTarget.value });
@@ -17,8 +26,11 @@ class HomeView extends Component {
     e.preventDefault();
     searchMovies(this.state.query).then(fetchedMovies => {
       this.setState({ movies: fetchedMovies });
+      this.props.history.push({
+        pathname: this.props.location.pathname,
+        search: `q=${this.state.query}`,
+      });
     });
-    this.setState({ query: '' });
   };
 
   render() {
@@ -44,4 +56,4 @@ class HomeView extends Component {
   }
 }
 
-export default HomeView;
+export default MoviesView;
