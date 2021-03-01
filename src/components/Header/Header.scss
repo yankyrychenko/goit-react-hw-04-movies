@@ -1,0 +1,22 @@
+.section-header {
+  padding: 20px 5px;
+  background-color: #00bfff;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+}
+
+.nav-item {
+  margin-right: 30px;
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #000000;
+}
+
+.active-link {
+  color: #ffffff;
+}
